@@ -23,9 +23,9 @@ public extension JobsProvider {
         let jobs = Self.jobs
         let args = CommandLine.arguments
 
-        guard args.count > 1 else {
+        guard args.count > 1, args[1] == "run" else {
             // list the available jobs
-            Output.success("No job specified. Here are the available jobs:\n")
+            Output.success("Here are the available jobs:\n")
             for job in jobs.dict.values {
                 Output.success(job.name)
                 if let desc = job.description {
@@ -36,7 +36,20 @@ public extension JobsProvider {
             return
         }
 
-        let name = args[1]
+        guard args.count > 2 else {
+            // It's a "run" operation, but we don't have a job name.
+            Output.error("Please specify a job name. Here are the available jobs:\n")
+            for job in jobs.dict.values {
+                Output.success(job.name)
+                if let desc = job.description {
+                    Output.print(desc)
+                }
+                Output.print("")
+            }
+            return
+        }
+
+        let name = args[2]
 
         guard let job = jobs.dict[name] else {
             Output.error("No job found for name: \(name)")
@@ -49,7 +62,7 @@ public extension JobsProvider {
         FileManager.default.changeCurrentDirectoryPath(newPath)
 
         do {
-            try job.action(Array(args.suffix(from: 2)))
+            try job.action(Array(args.suffix(from: 3)))
         } catch {
             Output.error("Job \(name) failed with error:")
             Output.error(error)
