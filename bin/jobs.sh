@@ -27,7 +27,7 @@ locate_and_run() {
 }
 
 run() {
-  if [ "$1 == "list" || "$1 == "run" ]; then
+  if [ "$1" == "list" ] || [ "$1" == "run" ]; then
     swift run MyJobs $@
     cd $startdir
     exit 0
@@ -37,6 +37,7 @@ run() {
   echo "swiftjobs init"
   echo "swiftjobs list"
   echo "swiftjobs run <job name> [arguments]"
+  cd $startdir
   exit 1
 }
 
