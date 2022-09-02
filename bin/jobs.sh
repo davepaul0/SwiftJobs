@@ -7,17 +7,13 @@ startdir=$(pwd)
 
 locate_and_run() {
   folder=${PWD##*/}
-  if [ $folder == "MyJobs" ]; then
-    swift run MyJobs $@
-    cd $startdir
-    exit 0
+  if [ "$folder" == "MyJobs" ]; then
+    run $@
   fi
 
   if [ -d "MyJobs" ]; then
     cd MyJobs
-    swift run MyJobs $@
-    cd $startdir
-    exit 0
+    run $@
   fi
 
   if [ $(pwd) == "/" ]; then
@@ -30,11 +26,28 @@ locate_and_run() {
   locate_and_run $@
 }
 
-initialize() {
-  echo "Creating a new project at $(pwd)/MyJobs"
+run() {
+  if [ "$1 == "list" || "$1 == "run" ]; then
+    swift run MyJobs $@
+    cd $startdir
+    exit 0
+  fi
+
+  echo "Use one of the following commands:"
+  echo "swiftjobs init"
+  echo "swiftjobs list"
+  echo "swiftjobs run <job name> [arguments]"
+  exit 1
 }
 
-if [ $1 == "init" ]; then
+initialize() {
+  echo "Creating a new project at $(pwd)/MyJobs"
+  brew_dir=$(brew --prefix SwiftJobs)
+  cp -r ${brew_dir}/libexec/starter MyJobs 
+  echo "MyJobs folder is created!  Add jobs to the JobsProvider and then use 'swiftjobs run <job name>'."
+}
+
+if [ "$1" == "init" ]; then
   initialize $0
   exit 0
 fi
