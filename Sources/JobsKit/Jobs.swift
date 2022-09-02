@@ -17,10 +17,13 @@ public struct Job {
 public struct Jobs {
     internal let dict: [String: Job]
 
-//    public func execute(_ name: String) throws {
-//        guard let job = dict[name] else {
-//            throw Error("Tried to execute job named \(name) but job doesn't exist.")
-//        }
-//        try job.action([]) // TODO: get params from somewhere I suppose
-//    }
+    internal func listAll() {
+        for job in dict.values {
+            Output.success(job.name)
+            if let desc = job.description {
+                Output.print(desc)
+            }
+            Output.print("")
+        }
+    }
 }

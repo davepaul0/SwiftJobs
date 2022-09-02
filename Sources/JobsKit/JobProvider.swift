@@ -26,34 +26,22 @@ public extension JobsProvider {
         guard args.count > 1, args[1] == "run" else {
             // list the available jobs
             Output.success("Here are the available jobs:\n")
-            for job in jobs.dict.values {
-                Output.success(job.name)
-                if let desc = job.description {
-                    Output.print(desc)
-                }
-                Output.print("")
-            }
+            jobs.listAll()
             return
         }
 
         guard args.count > 2 else {
             // It's a "run" operation, but we don't have a job name.
             Output.error("Please specify a job name. Here are the available jobs:\n")
-            for job in jobs.dict.values {
-                Output.success(job.name)
-                if let desc = job.description {
-                    Output.print(desc)
-                }
-                Output.print("")
-            }
-            return
+            jobs.listAll()
+            exit(1)
         }
 
         let name = args[2]
 
         guard let job = jobs.dict[name] else {
             Output.error("No job found for name: \(name)")
-            return
+            exit(1)
         }
 
         // We have a job to run!  But before we do...
@@ -66,6 +54,7 @@ public extension JobsProvider {
         } catch {
             Output.error("Job \(name) failed with error:")
             Output.error(error)
+            exit(1)
         }
     }
 }

@@ -1,9 +1,9 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.6
 import PackageDescription
 
 let package = Package(
     name: "MyJobs",
-    platforms: [.macOS(.v13)],
+    platforms: [.macOS(.v12)],
     products: [
         .executable(
             name: "MyJobs",
