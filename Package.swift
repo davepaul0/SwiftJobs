@@ -16,5 +16,7 @@ let package = Package(
         .target(
             name: "JobsKit",
             dependencies: []),
+        .testTarget(name: "SwiftJobsTests",
+                   dependencies: ["JobsKit"])
     ]
 )

@@ -44,6 +44,7 @@ public extension JobsProvider {
             exit(1)
         }
 
+        Output.print("Running job \"\(name)\"")
         // We have a job to run!  But before we do...
         // ... set the current path up one step, to the user's project folder
         let newPath = (FileManager.default.currentDirectoryPath as NSString).deletingLastPathComponent

@@ -27,10 +27,13 @@ locate_and_run() {
 }
 
 run() {
+  echo "Found a project at ${PWD}"
+
   if [ "$1" == "list" ] || [ "$1" == "run" ]; then
     swift run MyJobs $@
+    status=$?
     cd $startdir
-    exit 0
+    exit $status
   fi
 
   echo "Use one of the following commands:"

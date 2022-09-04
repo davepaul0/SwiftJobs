@@ -1,5 +1,8 @@
 # SwiftJobs
 
+> **Warning**
+> SwiftJobs is not ready for general adoption.
+
 A general use task runner in Swift. Inspired by Rake, Fastlane, and others.
 
 Define your "jobs" in Swift:

@@ -1,9 +1,9 @@
 import Foundation
 
-struct Command {
+public struct Command {
 
     /// Runs the given shell command
-    @discardableResult static func run(_ input: String, path: URL? = nil) throws -> String {
+    @discardableResult public static func run(_ input: String, path: URL? = nil) throws -> String {
         let task = Process()
         let pipe = Pipe()
 
@@ -29,7 +29,7 @@ struct Command {
     }
 
     /// Runs the given shell command in an async context.
-    static func async(_ input: String, path: URL? = nil) async throws -> String {
+    static public func async(_ input: String, path: URL? = nil) async throws -> String {
         try await Task {
             await Task.yield()
             return try Self.run(input, path: path)
