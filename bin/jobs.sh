@@ -47,7 +47,7 @@ run() {
 initialize() {
   echo "Creating a new project at $(pwd)/MyJobs"
   brew_dir=$(brew --prefix SwiftJobs)
-  cp -r ${brew_dir}/libexec/starter MyJobs 
+  cp -r ${brew_dir}/libexec/MyJobs MyJobs
   echo "MyJobs folder is created!  Add jobs to the JobsProvider and then use 'swiftjobs run <job name>'."
 }
 
