@@ -1,5 +1,8 @@
 import Foundation
 
+/// A `Job` is a basic unit of work that SwiftJobs can execute.
+/// Your `MyJobs` instance will provide `Job` items to SwiftJobs via the `JobsProvider` protocol.
+/// You can then execute those `Job` items via the `swiftjobs` command line executable.
 public struct Job {
     public let name: String
     public let description: String?
@@ -14,6 +17,7 @@ public struct Job {
     }
 }
 
+/// A collection of multiple `Job` instances.
 public struct Jobs {
     internal let dict: [String: Job]
 

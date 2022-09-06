@@ -1,8 +1,9 @@
 import Foundation
 
-public struct Command {
+/// A namespace for executing shell commands inside of a `Job`.
+public enum Command {
 
-    /// Runs the given shell command
+    /// Runs the given shell command, blocking the current thread until the command completes.
     @discardableResult public static func run(_ input: String, path: URL? = nil) throws -> String {
         let task = Process()
         let pipe = Pipe()

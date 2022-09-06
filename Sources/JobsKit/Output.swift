@@ -12,6 +12,7 @@ private struct Colors {
     static let white = "\u{001B}[0;37m"
 }
 
+/// A namespace that provides methods for expressive output from your `Job` code.
 public enum Output {
     public static func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
         Swift.print(items, separator: separator, terminator: terminator)

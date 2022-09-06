@@ -1,5 +1,6 @@
 import Foundation
 
+/// A Builder that creates a `Jobs` object from multiple `Job` instances.
 @resultBuilder public struct JobsBuilder {
     public static func buildBlock(_ components: Job...) -> [Job] {
         Array(components)
@@ -14,6 +15,8 @@ import Foundation
     }
 }
 
+/// Provides `Jobs` to the SwiftJobs runtime.
+/// Your `MyJobs` project must declare an object that adopts the `JobsProvider` protocol.
 public protocol JobsProvider {
     @JobsBuilder static var jobs: Jobs { get }
 }
