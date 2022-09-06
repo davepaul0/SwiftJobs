@@ -7,16 +7,16 @@ let package = Package(
     name: "SwiftJobs",
     platforms: [.macOS(.v12)],
     products: [
-        .library(name: "JobsKit", targets: ["JobsKit"])
+        .library(name: "SwiftJobs", targets: ["SwiftJobs"])
     ],
     dependencies: [
 
     ],
     targets: [
         .target(
-            name: "JobsKit",
+            name: "SwiftJobs",
             dependencies: []),
         .testTarget(name: "SwiftJobsTests",
-                   dependencies: ["JobsKit"])
+                   dependencies: ["SwiftJobs"])
     ]
 )

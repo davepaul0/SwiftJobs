@@ -6,7 +6,7 @@
 A general use task runner in Swift. Inspired by Rake, Fastlane, and others.
 
 Define your "jobs" in Swift:
-```
+```swift
 @main
 struct MyJobs: JobsProvider {
     static var jobs: Jobs {
@@ -23,7 +23,7 @@ struct MyJobs: JobsProvider {
 ```
 
 Then run them from the command line:
-```
+```shell
 swiftjobs run hello
 ```
 
@@ -32,11 +32,13 @@ swiftjobs run hello
 
 Install SwiftJobs with Homebrew:
 
-`brew install davepaul0/tap/swiftjobs`
+```shell
+brew install davepaul0/tap/swiftjobs
+```
 
 ## Setup
 
-```
+```shell
 swiftjobs init
 ```
 
@@ -46,12 +48,14 @@ Open the package in Xcode and add your jobs!
 ## List
 
 List all jobs declared in the local `MyJobs` project:
-`swiftjobs list`
+```shell
+swiftjobs list
+```
 
 ## Run
 
-```
-swiftjobs run <job name>`
+```shell
+swiftjobs run <job name>
 ```
 
 ### On working directories and folder hierarchies

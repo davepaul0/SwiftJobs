@@ -1,5 +1,5 @@
 import Foundation
-import JobsKit
+import SwiftJobs
 
 @main
 struct MyJobs: JobsProvider {

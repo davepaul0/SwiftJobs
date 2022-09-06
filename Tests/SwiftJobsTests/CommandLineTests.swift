@@ -5,7 +5,7 @@
 //  Created by Dave Paul on 9/4/22.
 //
 
-import JobsKit
+import SwiftJobs
 import XCTest
 
 private let projectRoot: String = {
@@ -16,7 +16,7 @@ private let projectRoot: String = {
 
 /// CommandLineTests executes actual command line invocations of `swiftjobs` and tests the results.
 /// A modified version of the MyJobs starter template is copied into "<projectRoot>/test" along with the command line executable.
-/// Each test function uses JobsKit's `Command` to run the executable.
+/// Each test function uses SwiftJobs' `Command` to run the executable.
 final class CommandLineTests: XCTestCase {
     static override func setUp() {
         try? FileManager.default.removeItem(atPath: "\(projectRoot)/test")
@@ -61,7 +61,6 @@ final class CommandLineTests: XCTestCase {
     func testRunWithoutJobName() throws {
         XCTAssertThrowsError(try Command.run("./jobs.sh run"),
                              "Command should return an error since no job was provided") { error in
-            print(error)
             XCTAssert("\(error)".localizedCaseInsensitiveContains("Please specify a job name"))
         }
     }

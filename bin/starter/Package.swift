@@ -15,6 +15,6 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "MyJobs",
-            dependencies: [.product(name: "JobsKit", package: "SwiftJobs")]),
+            dependencies: [.product(name: "SwiftJobs", package: "SwiftJobs")]),
     ]
 )

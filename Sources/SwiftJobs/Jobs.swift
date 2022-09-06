@@ -7,13 +7,24 @@ public struct Job {
     public let name: String
     public let description: String?
     public let isDefault: Bool
-    public let action: ([String]) throws -> Void
+    public let action: ([String]) async throws -> Void
+
+    private init(_ name: String, description: String? = nil, isDefault: Bool = false, action: @escaping ([String]) async throws -> Void) {
+        self.name = name
+        self.isDefault = isDefault
+        self.description = description
+        self.action = action
+    }
 
     public init(_ name: String, description: String? = nil, isDefault: Bool = false, action: @escaping ([String]) throws  -> Void) {
         self.name = name
         self.isDefault = isDefault
         self.description = description
         self.action = action
+    }
+
+    public static func async(_ name: String, description: String? = nil, isDefault: Bool = false, action: @escaping ([String]) async throws -> Void) -> Job {
+        return .init(name, description: description, isDefault: isDefault, action: action)
     }
 }
 

@@ -22,7 +22,7 @@ public protocol JobsProvider {
 }
 
 public extension JobsProvider {
-    static func main() {
+    static func main() async {
         let jobs = Self.jobs
         let args = CommandLine.arguments
 
@@ -54,7 +54,7 @@ public extension JobsProvider {
         FileManager.default.changeCurrentDirectoryPath(newPath)
 
         do {
-            try job.action(Array(args.suffix(from: 3)))
+            try await job.action(Array(args.suffix(from: 3)))
         } catch {
             Output.error("Job \(name) failed with error:")
             Output.error(error)
