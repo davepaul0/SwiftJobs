@@ -35,4 +35,17 @@ public enum Output {
         Swift.print(items, separator: separator, terminator: terminator)
         Swift.print(Colors.reset, terminator: "")
     }
+
+
+    internal static func info(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+        Swift.print(Colors.blue, terminator: "")
+        Swift.print(items, separator: separator, terminator: terminator)
+        Swift.print(Colors.reset, terminator: "")
+    }
+
+    internal static func quote(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+        Swift.print(Colors.cyan, terminator: "")
+        Swift.print(items, separator: separator, terminator: terminator)
+        Swift.print(Colors.reset, terminator: "")
+    }
 }

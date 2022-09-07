@@ -28,7 +28,8 @@ public extension JobsProvider {
 
         guard args.count > 1, args[1] == "run" else {
             // list the available jobs
-            Output.success("Here are the available jobs:\n")
+            Output.success("Here are the available jobs:")
+            Output.print("")
             jobs.listAll()
             return
         }
