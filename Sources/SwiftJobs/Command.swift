@@ -52,6 +52,7 @@ public enum Command {
     }
 }
 
+// all mutable state is guarded by the lock, so we can safely declare `LineBuilder` as Sendable.
 private class LineBuilder: @unchecked Sendable {
     let lock = NSLock()
     var lines = [String]()

@@ -1,5 +1,11 @@
 import Foundation
 
+private let formatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss  "
+    return formatter
+}()
+
 private struct Colors {
     static let reset = "\u{001B}[0;0m"
     static let black = "\u{001B}[0;30m"
@@ -14,38 +20,43 @@ private struct Colors {
 
 /// A namespace that provides methods for expressive output from your `Job` code.
 public enum Output {
+    /// Print to the console and log file.
     public static func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        Swift.print(items, separator: separator, terminator: terminator)
+        Self.output(items, separator: separator, terminator: terminator, color: nil)
     }
 
+    /// Print to the console and log file.  The console will use a non-default color to highlight the content as a warning.
     public static func warn(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        Swift.print(Colors.yellow, terminator: "")
-        Swift.print(items, separator: separator, terminator: terminator)
-        Swift.print(Colors.reset, terminator: "")
+        Self.output(items, separator: separator, terminator: terminator, color: Colors.yellow)
     }
 
+    /// Print to the console and log file.  The console will use a non-default color to highlight the content as an error.
     public static func error(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        Swift.print(Colors.red, terminator: "")
-        Swift.print(items, separator: separator, terminator: terminator)
-        Swift.print(Colors.reset, terminator: "")
+        Self.output(items, separator: separator, terminator: terminator, color: Colors.red)
     }
 
+    /// Print to the console and log file.  The console will use a non-default color to highlight the content as a success.
     public static func success(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        Swift.print(Colors.green, terminator: "")
-        Swift.print(items, separator: separator, terminator: terminator)
-        Swift.print(Colors.reset, terminator: "")
+        Self.output(items, separator: separator, terminator: terminator, color: Colors.green)
     }
-
 
     internal static func info(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        Swift.print(Colors.blue, terminator: "")
-        Swift.print(items, separator: separator, terminator: terminator)
-        Swift.print(Colors.reset, terminator: "")
+        Self.output(items, separator: separator, terminator: terminator, color: Colors.blue)
     }
 
     internal static func quote(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        Swift.print(Colors.cyan, terminator: "")
+        Self.output(items, separator: separator, terminator: terminator, color: Colors.cyan)
+    }
+
+    private static func output(_ items: Any..., separator: String, terminator: String, color: String?) {
+        Swift.print(formatter.string(from: Date()), terminator: "")
+
+        if let color {
+            Swift.print(color, terminator: "")
+        }
         Swift.print(items, separator: separator, terminator: terminator)
-        Swift.print(Colors.reset, terminator: "")
+        if color != nil {
+            Swift.print(Colors.reset, terminator: "")
+        }
     }
 }
